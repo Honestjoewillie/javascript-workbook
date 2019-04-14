@@ -7,39 +7,54 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-//new code
-/*function translatePigLatin(str){
-  //this finds the first vowel in the string put in
-  //const firstVowel = str.match(/[aeiou]/);
-  //this finds the index value of the first Vowel
-  //const firstPosition = str.indexOf(firstVowel);
-//this first position starts with 0 then it does NOT start with a vowel
-
-const firstPosition = findFirstVowelPosition(str);
-  if (firstPosition > 0){
-    //slice gets you everything from where the vowel is left
-    //slice that part off and put it to the end and ad ay.
-    return str.slice(firstPosition) + str.slice(0, firstPosition) + "ay";
-  }
-  return str + "yay";
-  }
-  function findFirstVowelPosition(str){
-    for (var i=0; i < str.length; i++){
-      if ("aeiou".indexOf(str[i]) !== -1){
-        return i;
+//Andrew Code starts here:
+const vowelsAsArray = ['a', 'e', 'i', 'o', 'u'];
+const pigLatin = (word) => {
+  if (validation(word)){
+    word = convert(word);
+    let englishWord = word;
+    englishWord = word.split('');
+    if (vowelsAsArray.includes(word[0])){
+      return word += 'yay';
+    }
+    else {
+      for (let i = 0; i < englishWord.length; i++) {
+        if (!vowelsAsArray.includes(word[i])) {
+          englishWord.push(englishWord.shift());
+        }
+        else{
+          englishWord.push('ay');
+          return englishWord.join('');
+        }
       }
     }
-  }*/
+  }
+  else{
+    return console.log('Bad Input, Yo!');
+  }
+}
+const validation = (word) =>{
+  if (typeof word === 'string'){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+const convert = (word) =>{
+  const trimmedWord = word.trim();
+  const convertedWord = trimmedWord.toLowerCase();
+  return convertedWord;
+}
+
   
   
 
 
-function pigLatin(word) {
-
+/*function pigLatin(word) {
 //const words = wordword.toLowerCase().trim().split(' ');  
 //for(var i=0;i<word.length;i++){
-
-const word = sentence.toLowerCase().trim();
+const word = word.toLowerCase().trim();
 
 const vowels = ["a", "e", "i", "o", "u"];
 //find if the first letter is a vowel
@@ -49,7 +64,7 @@ if (vowels.includes(word[0])){
   return word + "yay";
 }
 //if cons add "ay"
-else{ 
+else { 
   for (let i of word){
     if (vowels.includes(i)){
       vowelIndex = word.indexOf(i);
@@ -58,7 +73,7 @@ else{
   }
   return word.slice(vowelIndex) + word.slice(0, vowelIndex) + "ay";
 }
-}
+}*/
 
 
 function getPrompt() {
