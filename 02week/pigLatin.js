@@ -7,32 +7,83 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//Andrew Code starts here:
+// const vowelsAsArray = ['a', 'e', 'i', 'o', 'u'];
+// const pigLatin = (word) => {
+//   if (validation(word)){
+//     word = convert(word);
+//     let englishWord = word;
+//     englishWord = word.split('');
+//     if (vowelsAsArray.includes(word[0])){
+//       return word += 'yay';
+//     }
+//     else {
+//       for (let i = 0; i < englishWord.length; i++) {
+//         if (!vowelsAsArray.includes(word[i])) {
+//           englishWord.push(englishWord.shift());
+//         }
+//         else{
+//           englishWord.push('ay');
+//           return englishWord.join('');
+//         }
+//       }
+//     }
+//   }
+//   else{
+//     return console.log('Bad Input, Yo!');
+//   }
+// }
+// const validation = (word) =>{
+//   if (typeof word === 'string'){
+//     return true;
+//   }
+//   else {
+//     return false;
+//   }
+// }
+// const convert = (word) =>{
+//   const trimmedWord = word.trim();
+//   const convertedWord = trimmedWord.toLowerCase();
+//   return convertedWord;
+// }
 
+  
+  
 
 
 function pigLatin(word) {
-
 //const words = wordword.toLowerCase().trim().split(' ');  
 //for(var i=0;i<word.length;i++){
-word = word.toLowerCase().trim();
+word = word.toLowerCase().trim().split(' ');
 
-const vowels = ["a", "e", "i", "o", "u"];
-//find if the first letter is a vowel
-let vowelIndex = 0;
-//if a vowel add "yay" to the end
-if (vowels.includes(word[0])){
-  return word.split() + "yay";
-}
-//if cons add "ay"
-else{ 
-  for (let i of word){
-    if (vowels.includes(i)){
-      vowelIndex = word.indexOf(i);
-      break;
-    }
+//new array of pig latin words
+const pigWords = [];
+//loop through array of words to translate each word into pig latin
+for (let i = 0; i < word.length; i++) {
+
+  const vowels = ["a", "e", "i", "o", "u"];
+  //find if the first letter is a vowel
+  let vowelIndex = 0;
+  //if a vowel add "yay" to the end
+  if (vowels.includes(word[i][0])){
+    console.log(i, word[i]);
+    //calling on pigWords array, and adding if statement results to the end
+    pigWords.push(word[i] + "yay");
   }
-  return word.slice(vowelIndex).split() + word.slice(0, vowelIndex).split() + "ay";
+  //if cons add "ay"
+  else { 
+    for (let j of word[i]){
+      if (vowels.includes(j)){
+        vowelIndex = word[i].indexOf(j);
+        console.log(i, word[i]);
+        break;
+      }
+    }
+    pigWords.push(word[i].slice(vowelIndex) + word[i].slice(0, vowelIndex) + "ay");
+  }
 }
+const results = pigWords.join(' ');
+  return results;
 }
 
 
