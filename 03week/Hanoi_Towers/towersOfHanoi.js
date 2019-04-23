@@ -19,10 +19,10 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece(num, a, b, c) {
+function movePiece(i, a, b, c) {
   // Your code here
-  if (num === 1){
-    movePiece(num  - 1, a, b, c)
+  if (i === 1){
+    movePiece(num - 1, a, b, c)
   }
 
 }
@@ -41,6 +41,17 @@ function checkForWin() {
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
+  if (i === 1) {
+    moveBy(a, b);
+    num++;
+  }
+  else {
+    towersOfHanoi( i - 1 , a, c, b);
+    moveBy(a, b);
+    num++;
+
+    towersOfHanoi(i - 1, c, b, a);
+  }
 
 }
 
