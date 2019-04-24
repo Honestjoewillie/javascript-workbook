@@ -19,17 +19,16 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece(i, a, b, c) {
+function movePiece(moveFrom, moveTo) {
   // Your code here
-  if (i === 1){
-    movePiece(num - 1, a, b, c)
-  }
+  let start = moveFrom.pop();
+  moveTo.push(start);
 
 }
 
-function isLegal() {
+function isLegal(moveFrom, moveTo) {
   // Your code here
-if (movePiece > endStack[]){
+if ([moveFrom.length -1] > [moveTo.length-1]) {
   return "Not a legal move, please try again."
 }
 }
@@ -40,18 +39,9 @@ function checkForWin() {
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
-  if (i === 1) {
-    moveBy(a, b);
-    num++;
-  }
-  else {
-    towersOfHanoi( i - 1 , a, c, b);
-    moveBy(a, b);
-    num++;
-
-    towersOfHanoi(i - 1, c, b, a);
-  }
+  let moveFrom = stacks[startStack];
+  let moveTo = stacks[endStack];
+  
 
 }
 
