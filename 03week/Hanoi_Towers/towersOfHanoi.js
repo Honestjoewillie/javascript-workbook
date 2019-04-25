@@ -51,7 +51,8 @@ function checkForWin() {
 }
 
 function towersOfHanoi(startStack, endStack) {
-  let moveFrom = stacks[startStack];
+  
+  let moveFrom = stacks[startStack]; 
   let moveTo = stacks[endStack];
   movePiece(moveFrom, moveTo);
 }
