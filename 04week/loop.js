@@ -17,20 +17,19 @@ const person = {
     lastName: 'Doe',
     birthDate: 'Jan 5, 1925',
     gender: 'female'
-}
+};
 
 //3--Use a for...in loop and if statement to console.log the value associated with 
 //the key birthDate if the birth year is an odd number.
-
-// function findDate(person){
-//     let results = '';
-//     for (let i in person){
-//     result += person
-//     }
-// }
-// if (x % 2 != 0){
-//     console.log(x);
-// }
+ function findDate(obj){
+     for (let i in obj){
+         if(obj[i].match(/^.*[13579]$/)){
+            console.log(obj[i].match(/^.*[13579]$/));
+            console.log(obj[i]);
+         }
+    }
+}
+ findDate(person);
 
 //4--Create an arrayOfPersons that contains mulitiple objects. 
 //4--You can simply copy/paste the person object you made above multiple times. 
@@ -92,6 +91,13 @@ const info = arrayOfPersons.map(function(list){
 });
 
 //6--Use .filter() to filter the persons array and console.log only males in the array.
-const males = 
-//7--Use .filter() to filter the persons array and console.log 
-//7--only people that were born before Jan 1, 1990.
+const males = arrayOfPersons.filter(function(dudes) {
+    return dudes.sex === 'male';
+});
+console.log(males);
+
+//7--Use .filter() to filter the persons array and console.log only people that were born before Jan 1, 1990
+const b1990 = arrayOfPersons.filter(function(old){
+    return old.born < 1990;
+});
+console.log(b1990);
