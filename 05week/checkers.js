@@ -8,13 +8,22 @@ const rl = readline.createInterface({
 });
 
 
-function Checker() {
-  // Your code here
+class Checker {
+  constructor(color){
+    if (color === 'white'){
+      this.symbol = '○';
+    }
+    else if (color === 'black'){
+      this.symbol = '●';
+    }
+  }
 }
+
 
 class Board {
   constructor() {
-    this.grid = []
+    this.grid = [];
+    this.checkers = [];
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -52,8 +61,48 @@ class Board {
     console.log(string);
   }
 
-  // Your code here
+  createCheckers(){
+    const white = [
+      [0, 1], [0, 3], [0, 5], [0, 7],
+      [1, 0], [1, 2], [1, 4], [1, 6],
+      [2, 1], [2, 3], [2, 5], [2, 7]
+    ]
+    const black = [
+      [5, 0], [5, 2], [5, 4], [5, 6],
+      [6, 1], [6, 3], [6, 5], [6, 7],
+      [7, 0], [7, 2], [7, 4], [7, 6]
+    ]
+    for (let i = 0; i<12; i++){
+      let corordinate = white[i];
+      let row = corordinate[0];
+      let column = corordinate[1];
+      this.grid[row][column] = new Checker("white");
+      this.checkers.push(this.grid[row][column]);
+    }
+    for (let i = 0; i<12; i++){
+      let corordinate = black[i];
+      let row = corordinate[0];
+      let column = corordinate[1];
+      this.grid[row][column] = new Checker("black");
+      this.checkers.push(this.grid[row][column]);
+    }
+  }
+  selectChecker(row, column){
+      return this.grid[row][column];
+  }
+  killChecker(position){
+    let checkerToKill = selectChecker(position[0], position[1]);
+    for (let i = 0; i<this.checkers.length; i++){
+      if(checkerToKill = this.checkers[i]){
+        this.checkers.splice(i, 1);
+        this.grid[position[0]][position[1]] = null;
+        break;
+      }
+      console.log(position);
+    }
+  }
 }
+
 
 class Game {
   constructor() {
@@ -61,6 +110,20 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers();
+  }
+  moveChecker(start, end){ //start and end each contain a ROW & Column ex: [50, 41]
+    let startRow = start.substring(0, 1);
+    let startColumn = start.substring(1, 2);
+    let endRow = end.substring(0, 1);
+    let endColumn = end.substring(1, 2);
+    let checker = this.board.selectChecker(startRow, startColumn);
+    this.board.grid[startRow][startColumn] = null;
+    this.board.grid[endRow][endColumn] = checker;
+    //if a jump moves 2 rows then I killed a checker so call killchecker
+    if((startRow) - (endRow) || (endRow) - (startRow) == 2){
+      this.board.killChecker([0][1]);
+    }
   }
 }
 
