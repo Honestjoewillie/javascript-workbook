@@ -98,7 +98,6 @@ class Board {
         this.grid[position[0]][position[1]] = null;
         break;
       }
-      console.log(position);
     }
   }
 }
@@ -121,9 +120,9 @@ class Game {
     this.board.grid[startRow][startColumn] = null;
     this.board.grid[endRow][endColumn] = checker;
     //if a jump moves 2 rows then I killed a checker so call killchecker
-    if((startRow) - (endRow) || (endRow) - (startRow) == 2){
-      this.board.killChecker([0][1]);
-    }
+    // if((startRow) - (endRow) || (endRow) - (startRow) == 2){
+    //   this.board.killChecker();
+    // }
   }
 }
 
