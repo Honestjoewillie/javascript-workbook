@@ -28,13 +28,54 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint() {
-  // your code here
+function generateHint(guess) {
+  //my code here
+  //corretLetterLocations = 
+  let solutionArray = solution.split('');
+  let guessArray = guess.split('');
+  let correctLetterLocations = 0;
+  for (let i = 0; i < 4; i++){ //loops through solution and guess
+    if (solutionArray[i] === guessArray[i]) { //looks to see if any of the guesses match the solution letter&locatuion
+      correctLetterLocations++; //if any do increase the correctLetterLocatins by 1
+      solutionArray[i] = null; //any that match mark as NULL in the solution.
+      //this way they are not tracked when we want to see if there are matching letters NOT in correct location
+    }
+  }
+  let correctLetters = 0; //will be used to see how many correct letters match
+   for (let i = 0; i < 4; i++){
+     let targetIndex = solutionArray.indexOf(guessArray[i]);
+     if (targetIndex > -1) { //compares soution to guess and marks correct letters if any 
+      correctLetters = correctLetters +1; //increase the count of correct letters
+      solutionArray[targetIndex] = null; //again getting rid of any of those letters in the array
+    }
+  }
+  return correctLetterLocations + "-" + correctLetters;
 }
 
-function mastermind(guess) {
-  solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
+function addGuessHint(guess){ //I feel this is wrong
+  //trying to solve step 9(Spec 3-add guess and hint to the board)
+  let hint = generateHint(guess);
+  board.push(hint);
+}
+
+function mastermind(guess) { 
+  //my code here
+  if (guess.length === 4 && guess !== solution){
+    generateHint(guess);
+  }
+  else if (solution === guess) {
+    return "You guessed it!";
+  }
+  if (guess > board.length){
+    return "You ran out of turns! The solution was " + solution;
+  }else if (guess.length < 4){
+    return "Must type 4 letters"
+  }
+
+  else {
+    addGuessHint(guess);
+    return "Guess again."
+  }
 }
 
 
