@@ -92,13 +92,19 @@ class Board {
   }
   killChecker(position){
     let checkerToKill = selectChecker(position[0], position[1]);
-    for (let i = 0; i<this.checkers.length; i++){
-      if(checkerToKill = this.checkers[i]){
-        this.checkers.splice(i, 1);
-        this.grid[position[0]][position[1]] = null;
-        break;
-      }
+    let indexChecker = this.checkers.indexOf(checker);
+    this.checkers.splice(indexChecker, 1);
+    this.grid[position[0]][position[1]] = null;
+    if(checkerToKill){
+      return;
     }
+    // for (let i = 0; i<this.checkers.length; i++){
+    //   if(checkerToKill == this.checkers[i]){
+    //     this.checkers.splice(i, 1);
+    //     this.grid[position[0]][position[1]] = null;
+    //     break;
+    //   }
+    // }
   }
 }
 
@@ -112,16 +118,47 @@ class Game {
     this.board.createCheckers();
   }
   moveChecker(start, end){ //start and end each contain a ROW & Column ex: [50, 41]
-    let startRow = start.substring(0, 1);
-    let startColumn = start.substring(1, 2);
-    let endRow = end.substring(0, 1);
-    let endColumn = end.substring(1, 2);
-    let checker = this.board.selectChecker(startRow, startColumn);
+    const startRow = parseInt(start[0]);
+    const startColumn = parseInt(start[1]);
+    const endRow = parseInt(end[0]);
+    const endColumn = parseInt(end[1]);
+
+    const checker = this.board.selectChecker(start[0], start[1]);
+
+    this.board.grid[ endRow ][ endColumn ] = checker;
     this.board.grid[startRow][startColumn] = null;
-    this.board.grid[endRow][endColumn] = checker;
-    //if a jump moves 2 rows then I killed a checker so call killchecker
-    // if((startRow) - (endRow) || (endRow) - (startRow) == 2){
-    //   this.board.killChecker();
+
+    // if (Math.sqrt((endRow - startRow)^2 + (endColumn - startColumn)^2) >= 2){
+    //   this.board.killChecker([(endRow + startRow) / 2, (endColumn + startColumn) / 2]);
+    // }
+    if(Math.abs(endRow - startRow) === 2) {
+      // To find the coordinates of the jumped piece,
+      // If source row coordinate minus the desination row is a positive number, (moving down the board),
+          // add 1 to the first source coordinate and assign it to the first coordinate of the jumped checker
+      // else (moving up the board)
+          // add 1 to the first source coordinate and assign it to the first coordinate of the jumped checker
+      let killRow = endRow - startRow > 0 ? startRow + 1 : endRow + 1
+      // If source row coordinate minus the desination row is more than 0, (moving down the board),
+      // assign the jumped row number to the second coordinate of the jumped checker
+      let killCol = endColumn - startColumn > 0 ? startColumn + 1 : endColumn + 1
+      // Reassign a NULL value to the coordinates of the jumped checker
+      this.board.grid[killRow][killCol] = null;
+      this.board.checkers.pop();
+  }
+    // let startRow = start.substring(0, 1);
+    // let startColumn = start.substring(1, 2);
+    // let endRow = end.substring(0, 1);
+    // let endColumn = end.substring(1, 2);
+    // let checker = this.board.selectChecker(startRow, startColumn);
+    // this.board.grid[startRow][startColumn] = null;
+    // this.board.grid[endRow][endColumn] = checker;
+    
+    // if(Math.abs((startRow) - (endRow)) === 2){
+    //   this.board.killChecker([(startRow + endRow) /2, (endRow + startRow )/ 2]);
+    // }
+    
+    // else if(Math.abs((endRow) - (startRow)) == 2){
+    //   this.board.killChecker(([endRow + startRow]) );
     // }
   }
 }
