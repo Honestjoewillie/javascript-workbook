@@ -98,13 +98,7 @@ class Board {
     if(checkerToKill){
       return;
     }
-    // for (let i = 0; i<this.checkers.length; i++){
-    //   if(checkerToKill == this.checkers[i]){
-    //     this.checkers.splice(i, 1);
-    //     this.grid[position[0]][position[1]] = null;
-    //     break;
-    //   }
-    // }
+    
   }
 }
 
@@ -128,38 +122,15 @@ class Game {
     this.board.grid[ endRow ][ endColumn ] = checker;
     this.board.grid[startRow][startColumn] = null;
 
-    // if (Math.sqrt((endRow - startRow)^2 + (endColumn - startColumn)^2) >= 2){
-    //   this.board.killChecker([(endRow + startRow) / 2, (endColumn + startColumn) / 2]);
-    // }
+  
     if(Math.abs(endRow - startRow) === 2) {
-      // To find the coordinates of the jumped piece,
-      // If source row coordinate minus the desination row is a positive number, (moving down the board),
-          // add 1 to the first source coordinate and assign it to the first coordinate of the jumped checker
-      // else (moving up the board)
-          // add 1 to the first source coordinate and assign it to the first coordinate of the jumped checker
       let killRow = endRow - startRow > 0 ? startRow + 1 : endRow + 1
-      // If source row coordinate minus the desination row is more than 0, (moving down the board),
-      // assign the jumped row number to the second coordinate of the jumped checker
       let killCol = endColumn - startColumn > 0 ? startColumn + 1 : endColumn + 1
-      // Reassign a NULL value to the coordinates of the jumped checker
+  
       this.board.grid[killRow][killCol] = null;
       this.board.checkers.pop();
   }
-    // let startRow = start.substring(0, 1);
-    // let startColumn = start.substring(1, 2);
-    // let endRow = end.substring(0, 1);
-    // let endColumn = end.substring(1, 2);
-    // let checker = this.board.selectChecker(startRow, startColumn);
-    // this.board.grid[startRow][startColumn] = null;
-    // this.board.grid[endRow][endColumn] = checker;
-    
-    // if(Math.abs((startRow) - (endRow)) === 2){
-    //   this.board.killChecker([(startRow + endRow) /2, (endRow + startRow )/ 2]);
-    // }
-    
-    // else if(Math.abs((endRow) - (startRow)) == 2){
-    //   this.board.killChecker(([endRow + startRow]) );
-    // }
+  
   }
 }
 
