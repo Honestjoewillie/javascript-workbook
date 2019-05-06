@@ -98,7 +98,6 @@ class Board {
     if(checkerToKill){
       return;
     }
-    
   }
 }
 
@@ -130,7 +129,6 @@ class Game {
       this.board.grid[killRow][killCol] = null;
       this.board.checkers.pop();
   }
-  
   }
 }
 
