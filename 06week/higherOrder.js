@@ -36,16 +36,18 @@ for(let index = 0; index < food.length; index++){
 const sum1 = newFoodArray.reduce(function(accumulator, currentValue){
   return accumulator + currentValue;
 }, 0)
-console.log(sum1);
+const yep = sum1.toString().split();
+console.log(yep);
 
 const numbers = [50, 10, 20].reduce(function(result, item){
   return result + item;
 }, 0);
-console.log(numbers);
+const final = numbers.toString().split();
+console.log(final);
 
 const foodTwo = [
   {apple: 40},
-  {pizza: 10},
+  {pizza: 17},
   {pie: 2}
 ];
 let newFoodArrayTwo = [];
@@ -54,8 +56,8 @@ for(let index = 0; index < foodTwo.length; index++){
     newFoodArrayTwo.push(foodTwo[index][i]);
   }
 }
-const sum2 = newFoodArrayTwo.filter(function(number){
-  return number >= 10;
+const sum2 = newFoodArrayTwo.filter(function(num){
+  return num % 2 === 0;
 });
 
 console.log(sum2);
