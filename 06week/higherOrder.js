@@ -2,38 +2,66 @@
 
 const assert = require('assert');
 
-function forEach(arr, callback) {
-  // Your code here
-}
-
+// function forEach(arr, callback) {
+//   // Your code here
+// }
+const arr = [10, 20, 30];
 function map(arr, callback) {
   // Your code here
+  let newArray = [];
+  for (let i = 0; i<arr.length; i++){
+    let elements = callback(arr[i]);
+    newArray.push(elements);
+  }
+  return newArray;
+  console.log(map);
 }
+const mapIt = map(arr, function(n){
+  n =n*2;
+  return n;
+})
+console.log(mapIt);
 
-function filter(arr, callback) {
-  // Your code here
+const food = [
+  {apple: 50},
+  {pizza: 10},
+  {pie: 20}
+];
+let newFoodArray = [];
+for(let index = 0; index < food.length; index++){
+  for(let i in food[index]){
+    newFoodArray.push(food[index][i]);
+  }
 }
+const sum1 = newFoodArray.reduce(function(accumulator, currentValue){
+  return accumulator + currentValue;
+}, 0)
+console.log(sum1);
 
-function some(arr, callback) {
-  // Your code here
-}
+const numbers = [50, 10, 20].reduce(function(result, item){
+  return result + item;
+}, 0);
+console.log(numbers);
 
-function every(arr, callback) {
-  // Your code here
+const foodTwo = [
+  {apple: 40},
+  {pizza: 10},
+  {pie: 2}
+];
+let newFoodArrayTwo = [];
+for(let index = 0; index < foodTwo.length; index++){
+  for(let i in foodTwo[index]){
+    newFoodArrayTwo.push(foodTwo[index][i]);
+  }
 }
+const sum2 = newFoodArrayTwo.filter(function(number){
+  return number >= 10;
+});
+
+console.log(sum2);
+
 
 if (typeof describe === 'function') {
-
-  describe('#forEach()', () => {
-    it('should call the callback the array.length number of times', () => {
-      let count = 0;
-      forEach([1, 2, 3], () => {
-        count++;
-      });
-      assert.equal(count, 3);
-    });
-  });
-
   describe('#map()', () => {
     const arr = [1, 2, 3];
     const mapped = map(arr, (num) => {
@@ -47,6 +75,15 @@ if (typeof describe === 'function') {
     })
   });
 
+  describe('#reduce()', () => {
+    it('should return array elements added together', () => {
+      const reduced = reduce([1, 2, 3], (acc, num) => {
+        return acc + num;
+      });
+      assert.deepEqual(reduced, 6);
+    });
+  });
+
   describe('#filter()', () => {
     it('should return an array of items that pass the predicate test', () => {
       const filtered = filter([1, 2, 3], (num) => {
@@ -55,49 +92,6 @@ if (typeof describe === 'function') {
       assert.deepEqual(filtered, [2]);
     });
   });
-
-  describe('#some()', () => {
-    let count = 0;
-    const somed = some([1, 2, 3, 4], (num) => {
-      count++;
-      return num % 2 === 0;
-    });
-    it('should return true if at least one item passes the predicate test', () => {
-      assert.equal(somed, true);
-    });
-    it('should stop at the first item that passes the predicate test', () => {
-      assert.equal(count, 2);
-    });
-    it('should return false if no items pass the predicate test', () => {
-      const somed = some([1, 3, 5], (num) => {
-        return num % 2 === 0;
-      });
-      assert.equal(somed, false);
-    });
-  });
-
-  describe('#every()', () => {
-    it('should return true if at all passes the predicate test', () => {
-      const everied = every([2, 4, 6], (num) => {
-        return num % 2 === 0;
-      });
-      assert.equal(everied, true);
-    });
-    let count = 0;
-    const everied = every([2, 3, 4, 5], (num) => {
-      count++;
-      return num % 2 === 0;
-    });
-    it('should return false if any item fails the predicate test', () => {
-      assert.equal(everied, false);
-    });
-    it('should stop at the first item that fails the predicate test', () => {
-      assert.equal(count, 2);
-    });
-  });
-
 } else {
-
   console.log('Only run the tests on this one!')
-
 }
