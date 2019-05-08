@@ -66,8 +66,7 @@ function filter(array, callback, thisObject) {
   }
   return filteredArray;
 }
-const sum3 = filter(food);
-console.log(sum3);
+
 
 // const food = 
 //   {apple: 50},
