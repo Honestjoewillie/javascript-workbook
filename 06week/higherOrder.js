@@ -21,17 +21,9 @@ const mapIt = map(arr, function(n){
 })
 console.log(mapIt);
 
-const object = [
-  {apple: 50},
-  {pizza: 10},
-  {pie: 20}
-];
-let newObject = [];
-for(let index = 0; index < object.length; index++){
-  for(let i in object[index]){
-    newObject.push(object[index][i]);
-  }
-}
+
+const checkObject = [{price: 10},{price: 20},{price: 30}];
+const checkArray = [10, 20, 30];
 function reduce(array, accumulator) {
     accumulator = accumulator || 0;
     for (let index = 0; index < array.length; index++) {
@@ -45,12 +37,39 @@ function reduce(array, accumulator) {
     }
     return accumulator;
 }
-const sum = reduce(object, function(a, b){
-  return a+b;
-})
-console.log(sum);
+const sum = reduce(checkArray, 10); // Set accumulator to 10
+console.log("ANSWER: ",sum);
 
-// const food = [
+const sum2 = reduce(checkObject, 10);
+console.log(sum2);
+
+const checkObject = [{price: 10},{price: 20},{price: 30}];
+const checkArray = [10, 20, 30];
+function filter(array, callback, thisObject) {
+  let filteredArray = [];
+  let filterCallback = callback;
+  if (thisObject) {
+      filterCallback = callback.bind(thisObject);
+  }
+  for (let index = 0; index < array.length; index++) {
+      if(typeof array[index] == 'number') {
+          if (filterCallback(array[index], index, array)) {
+              filteredArray.push(array[index]);
+          }
+      } else if(typeof array[index] == 'object') {
+          for(let i in array[index]){
+              if (filterCallback(array[index][i], index, array)) {
+                  filteredArray.push(array[index][i]);
+              }
+          }
+      }   
+  }
+  return filteredArray;
+}
+const sum3 = filter(food);
+console.log(sum3);
+
+// const food = 
 //   {apple: 50},
 //   {pizza: 10},
 //   {pie: 20}
@@ -90,7 +109,6 @@ console.log(sum);
 
 // console.log(sum2);
 
-
 if (typeof describe === 'function') {
   describe('#map()', () => {
     const arr = [1, 2, 3];
@@ -107,9 +125,7 @@ if (typeof describe === 'function') {
 
   describe('#reduce()', () => {
     it('should return array elements added together', () => {
-      const reduced = reduce([1, 2, 3], (acc, num) => {
-        return acc + num;
-      });
+      const reduced = reduce([1, 2, 3], 0);
       assert.deepEqual(reduced, 6);
     });
   });
@@ -125,3 +141,5 @@ if (typeof describe === 'function') {
 } else {
   console.log('Only run the tests on this one!')
 }
+
+
