@@ -54,8 +54,24 @@ const arrOfPeople = [
   const blueTeam = []
   const redTeam = []
   
+
+  
   class player {
-    constructor(){}
+    constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+        this.canThrowBall = canThrowBall;
+        this.canDodgeBall = canDodgeBall;
+        this.hasPaid = hasPaid;
+        this.isHealthy = isHealthy;
+        this.yearsExperience = yearsExperience;
+    }
+    joinRedTeam(player){
+        this.redTeam = redTeam;
+        player.redTeam.push(this);
+    }
+    joinBlueTeam(player){
+        this.blueTeam = blueTeam
+        player.blueTeam.push(this);
+    }
   }
   class blueTeammate {
     constructor(){}
@@ -78,5 +94,21 @@ const arrOfPeople = [
   }
   
   const makePlayer = (id) => {
+    //   if(){
+    //       aler "cant play"
+    //   }else {}
+      const players = document.getElementById('players');
+      const li = document.createElement("li");
+      const button_red = document.createElement("button");
+      button_red.innerHTML = "Red Team";
+      button_red.addEventListener('click', function() {makeRedPlayer(person.id)})
+      li.appendChild(button_red);
+      const button_blue = document.createElement("button");
+      button_blue.innerHTML = "Blue Team";
+      button_blue.addEventListener('click', function() {makeBluePlayer(person.id)})
+      li.appendChild(button_blue);
+      players.append(li);
+      const remove = indexOf(person.id);
+      players.splice(remove, 1);
     console.log(`li ${id} was clicked!`)
   }
