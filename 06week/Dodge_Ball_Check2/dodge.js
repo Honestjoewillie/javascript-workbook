@@ -54,61 +54,74 @@ const arrOfPeople = [
   const blueTeam = []
   const redTeam = []
   
-
-  
-  class player {
-    constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+  class Player {
+    constructor(id, name, age, skillSet, placeBorn, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.skillSet = skillSet;
+        this.placeBorn = placeBorn;
         this.canThrowBall = canThrowBall;
         this.canDodgeBall = canDodgeBall;
         this.hasPaid = hasPaid;
         this.isHealthy = isHealthy;
         this.yearsExperience = yearsExperience;
     }
-    joinRedTeam(player){
+    joinRedTeam(redTeam){
         this.redTeam = redTeam;
         player.redTeam.push(this);
     }
-    joinBlueTeam(player){
+    joinBlueTeam(blueTeam){
         this.blueTeam = blueTeam
         player.blueTeam.push(this);
     }
   }
-  class blueTeammate {
+  class BlueTeammate {
     constructor(){}
   }
-  class redTeammate {
+  class RedTeammate {
     constructor(){}
   }
   
   const listPeopleChoices = () => {
-    const listElement = document.getElementById('people')
+    const listElement = document.getElementById('people');
     arrOfPeople.map(person => {
-      const li = document.createElement("li")
-      const button = document.createElement("button")
-      button.innerHTML = "Make Player"
-      button.addEventListener('click', function() {makePlayer(person.id)} )
-      li.appendChild(button)
-      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
-      listElement.append(li)
-    })
+      const li = document.createElement("li");
+      const button = document.createElement("button");
+      button.innerHTML = "Make Player";
+      button.addEventListener('click', function() {makePlayer(person.id);
+        listElement.removeChild(li);});
+      li.appendChild(button);
+      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet));
+      listElement.append(li);
+    });
   }
   
   const makePlayer = (id) => {
+    //console.log(`li ${id} was clicked!`);
     //   if(){
     //       aler "cant play"
     //   }else {}
       const players = document.getElementById('players');
+      const findPlayer = arrOfPeople.find(function(entry){  
+        return entry.id == id;  
+      });
+      
+      const newPlayer = new Player (findPlayer.id, findPlayer.name, findPlayer.age, findPlayer.skillSet, findPlayer.placeBorn, true, true, true, true, 0);
+      listOfPlayers.push(newPlayer);
+      console.log(listOfPlayers);
+
+      //this adds people to list of players DOM
       const li = document.createElement("li");
+      li.appendChild(document.createTextNode(newPlayer.name));
       const button_red = document.createElement("button");
       button_red.innerHTML = "Red Team";
-      button_red.addEventListener('click', function() {makeRedPlayer(person.id)})
+      button_red.addEventListener('click', function() {makeRedPlayer(newPlayer.id)})
       li.appendChild(button_red);
+
       const button_blue = document.createElement("button");
       button_blue.innerHTML = "Blue Team";
-      button_blue.addEventListener('click', function() {makeBluePlayer(person.id)})
+      button_blue.addEventListener('click', function() {makeBluePlayer(newPlayer.id)})
       li.appendChild(button_blue);
       players.append(li);
-      const remove = indexOf(person.id);
-      players.splice(remove, 1);
-    console.log(`li ${id} was clicked!`)
-  }
+      }
