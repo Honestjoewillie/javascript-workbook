@@ -98,30 +98,43 @@ const arrOfPeople = [
   }
   
   const makePlayer = (id) => {
-    //console.log(`li ${id} was clicked!`);
-    //   if(){
-    //       aler "cant play"
-    //   }else {}
       const players = document.getElementById('players');
       const findPlayer = arrOfPeople.find(function(entry){  
         return entry.id == id;  
       });
-      
+      //this is the generic instance of the Player Class
       const newPlayer = new Player (findPlayer.id, findPlayer.name, findPlayer.age, findPlayer.skillSet, findPlayer.placeBorn, true, true, true, true, 0);
       listOfPlayers.push(newPlayer);
-      console.log(listOfPlayers);
-
       //this adds people to list of players DOM
       const li = document.createElement("li");
       li.appendChild(document.createTextNode(newPlayer.name));
-      const button_red = document.createElement("button");
-      button_red.innerHTML = "Red Team";
-      button_red.addEventListener('click', function() {makeRedPlayer(newPlayer.id)})
-      li.appendChild(button_red);
 
       const button_blue = document.createElement("button");
       button_blue.innerHTML = "Blue Team";
       button_blue.addEventListener('click', function() {makeBluePlayer(newPlayer.id)})
       li.appendChild(button_blue);
+      const button_red = document.createElement("button");
+      button_red.innerHTML = "Red Team";
+      button_red.addEventListener('click', function() {makeRedPlayer(newPlayer.id)})
+      li.appendChild(button_red);
       players.append(li);
+      }
+
+      const makeBluePlayer = (id) =>{
+        const playersBlue = document.getElementById('blue');
+        const selectBlue = listOfPlayers.find(function(pick){  
+          return pick.id == id;  
+        });
+        const newBluePlayer = new Player (selectBlue.id, selectBlue.name, selectBlue.age, selectBlue.skillSet, selectBlue.placeBorn, true, true, true, true, 0);
+        blueTeam.push(newBluePlayer);
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(newBluePlayer.name));
+        playersBlue.append(li);
+      }
+      const makeRedPlayer = (id) =>{
+        const playersRed = document.getElementById('red');
+        const selectRed = listOfPlayers.find(function(pick){
+          return pick.id == id;
+        });
+        playersRed.append(li);
       }
