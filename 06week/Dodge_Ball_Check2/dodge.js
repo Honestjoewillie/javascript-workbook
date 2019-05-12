@@ -77,10 +77,36 @@ const arrOfPeople = [
     }
   }
   class BlueTeammate {
-    constructor(){}
+    constructor(id, name, age, skillSet, placeBorn, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor){
+      this.id = id;
+      this.name = name;
+      this.age = age;
+      this.skillSet = skillSet;
+      this.placeBorn = placeBorn;
+      this.canThrowBall = canThrowBall;
+      this.canDodgeBall = canDodgeBall;
+      this.hasPaid = hasPaid;
+      this.isHealthy = isHealthy;
+      this.yearsExperience = yearsExperience;
+      this.mascot = mascot;
+      this.teamColor = teamColor;
+    }
   }
   class RedTeammate {
-    constructor(){}
+    constructor(id, name, age, skillSet, placeBorn, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor){
+      this.id = id;
+      this.name = name;
+      this.age = age;
+      this.skillSet = skillSet;
+      this.placeBorn = placeBorn;
+      this.canThrowBall = canThrowBall;
+      this.canDodgeBall = canDodgeBall;
+      this.hasPaid = hasPaid;
+      this.isHealthy = isHealthy;
+      this.yearsExperience = yearsExperience;
+      this.mascot = mascot;
+      this.teamColor = teamColor;
+    }
   }
   
   const listPeopleChoices = () => {
@@ -92,7 +118,7 @@ const arrOfPeople = [
       button.addEventListener('click', function() {makePlayer(person.id);
         listElement.removeChild(li);});
       li.appendChild(button);
-      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet));
+      li.appendChild(document.createTextNode(" - " + person.name + " - " + person.skillSet));
       listElement.append(li);
     });
   }
@@ -103,20 +129,29 @@ const arrOfPeople = [
         return entry.id == id;  
       });
       //this is the generic instance of the Player Class
-      const newPlayer = new Player (findPlayer.id, findPlayer.name, findPlayer.age, findPlayer.skillSet, findPlayer.placeBorn, true, true, true, true, 0);
+      const newPlayer = new Player (findPlayer.id, findPlayer.name, findPlayer.age, findPlayer.skillSet, findPlayer.placeBorn, true, true, true, true, 4);
       listOfPlayers.push(newPlayer);
       //this adds people to list of players DOM
       const li = document.createElement("li");
-      li.appendChild(document.createTextNode(newPlayer.name));
+      li.appendChild(document.createTextNode(newPlayer.name + " - "));
 
       const button_blue = document.createElement("button");
+      button_blue.style.backgroundColor='Blue';
+      button_blue.style.color = 'white';
+      button_blue.style.border = 'solid 1px black';
       button_blue.innerHTML = "Blue Team";
-      button_blue.addEventListener('click', function() {makeBluePlayer(newPlayer.id)})
+      button_blue.addEventListener('click', function() {makeBluePlayer(newPlayer.id);
+        players.removeChild(li);})
       li.appendChild(button_blue);
       const button_red = document.createElement("button");
+      button_red.style.backgroundColor='Red';
+      button_red.style.color = 'yellow';
+      button_red.style.border = 'solid 1px black';
       button_red.innerHTML = "Red Team";
-      button_red.addEventListener('click', function() {makeRedPlayer(newPlayer.id)})
+      button_red.addEventListener('click', function() {makeRedPlayer(newPlayer.id);
+        players.removeChild(li);})
       li.appendChild(button_red);
+
       players.append(li);
       }
 
@@ -125,10 +160,10 @@ const arrOfPeople = [
         const selectBlue = listOfPlayers.find(function(pick){  
           return pick.id == id;  
         });
-        const newBluePlayer = new Player (selectBlue.id, selectBlue.name, selectBlue.age, selectBlue.skillSet, selectBlue.placeBorn, true, true, true, true, 0);
-        blueTeam.push(newBluePlayer);
+        const newBluePlayer = new BlueTeammate (selectBlue.id, selectBlue.name, selectBlue.age, selectBlue.skillSet, selectBlue.placeBorn, true, true, true, true, 4, 'Dragon', 'Blue');
+        blueTeam.push(newBluePlayer); 
         const li = document.createElement("li");
-        li.appendChild(document.createTextNode(newBluePlayer.name));
+        li.appendChild(document.createTextNode(newBluePlayer.name + " - " + "Mascot = " + newBluePlayer.mascot + " and Team Color is " + newBluePlayer.teamColor));
         playersBlue.append(li);
       }
       const makeRedPlayer = (id) =>{
@@ -136,5 +171,26 @@ const arrOfPeople = [
         const selectRed = listOfPlayers.find(function(pick){
           return pick.id == id;
         });
+        const newRedPlayer = new RedTeammate (selectRed.id, selectRed.name, selectRed.age, selectRed.skillSet, selectRed.placeBorn, true, true, true, true, 4, 'Mister Jelly Bear', 'Red');
+        blueTeam.push(newRedPlayer);
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(newRedPlayer.name + " - " + "Mascot = " + newRedPlayer.mascot + " and Team Color is " + newRedPlayer.teamColor));
         playersRed.append(li);
+      }
+
+      //tests
+      if (typeof describe === 'function'){
+        describe('Player', function(){
+          it('should throw a ball, dodge a ball, has paid dues, is healthy, has experience', function(){
+            let newPlayer = new Player(true, true, true, true, 4);
+            assert.equal(newplayer.canThrowBall, true);
+            assert.equal(newplayer.canDodgeBall, true);
+            assert.equal(newplayer.hasPaid, true);
+            assert.equal(newplayer.isHealthy, true);
+            assert.equal(newplayer.yearsExperience, 4);
+          });
+        });
+        it('should be able to become a Red Player', function(){
+          let 
+        })
       }
