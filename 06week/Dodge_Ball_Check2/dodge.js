@@ -1,7 +1,5 @@
 'use strict';
 
-//let assert = require('assert');
-
 const arrOfPeople = [
     {
       id: 2,
@@ -174,6 +172,7 @@ const arrOfPeople = [
         const newBluePlayer = new BlueTeammate (selectBlue.id, selectBlue.name, selectBlue.age, selectBlue.skillSet, selectBlue.placeBorn, true, true, true, true, 4, 'Dragon', 'Blue');
         blueTeam.push(newBluePlayer);
         listOfPlayers.splice(blueIndex, 1); 
+
         const li = document.createElement("li");
         li.appendChild(document.createTextNode(newBluePlayer.name + " - " + "Mascot = " + newBluePlayer.mascot + " and Team Color is " + newBluePlayer.teamColor));
         playersBlue.append(li);
@@ -197,6 +196,8 @@ const arrOfPeople = [
       }
 
       //tests
+      //let assert = require('assert');
+      
       if (typeof describe === 'function'){
         describe('Player', function(){
           it('should throw a ball, dodge a ball, has paid dues, is healthy, has experience', function(){
