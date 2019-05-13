@@ -1,3 +1,7 @@
+'use strict';
+
+//let assert = require('assert');
+
 const arrOfPeople = [
     {
       id: 2,
@@ -128,9 +132,11 @@ const arrOfPeople = [
       const findPlayer = arrOfPeople.find(function(entry){  
         return entry.id == id;  
       });
+      const playerIndex = arrOfPeople.indexOf(findPlayer);
       //this is the generic instance of the Player Class
       const newPlayer = new Player (findPlayer.id, findPlayer.name, findPlayer.age, findPlayer.skillSet, findPlayer.placeBorn, true, true, true, true, 4);
       listOfPlayers.push(newPlayer);
+      arrOfPeople.splice(playerIndex, 1);
       //this adds people to list of players DOM
       const li = document.createElement("li");
       li.appendChild(document.createTextNode(newPlayer.name + " - "));
@@ -157,22 +163,34 @@ const arrOfPeople = [
 
       const makeBluePlayer = (id) =>{
         const playersBlue = document.getElementById('blue');
+        playersBlue.style.backgroundColor = 'blue';
+        playersBlue.style.color = 'white';
+        playersBlue.style.border = 'solid black 2px';
         const selectBlue = listOfPlayers.find(function(pick){  
           return pick.id == id;  
         });
+        const blueIndex = listOfPlayers.indexOf(selectBlue);
+
         const newBluePlayer = new BlueTeammate (selectBlue.id, selectBlue.name, selectBlue.age, selectBlue.skillSet, selectBlue.placeBorn, true, true, true, true, 4, 'Dragon', 'Blue');
-        blueTeam.push(newBluePlayer); 
+        blueTeam.push(newBluePlayer);
+        listOfPlayers.splice(blueIndex, 1); 
         const li = document.createElement("li");
         li.appendChild(document.createTextNode(newBluePlayer.name + " - " + "Mascot = " + newBluePlayer.mascot + " and Team Color is " + newBluePlayer.teamColor));
         playersBlue.append(li);
       }
       const makeRedPlayer = (id) =>{
         const playersRed = document.getElementById('red');
+        playersRed.style.backgroundColor = 'red';
+        playersRed.style.border = 'solid black 2px';
+        playersRed.style.color = 'yellow';
         const selectRed = listOfPlayers.find(function(pick){
           return pick.id == id;
         });
+        const redIndex = listOfPlayers.indexOf(selectRed);
+
         const newRedPlayer = new RedTeammate (selectRed.id, selectRed.name, selectRed.age, selectRed.skillSet, selectRed.placeBorn, true, true, true, true, 4, 'Mister Jelly Bear', 'Red');
-        blueTeam.push(newRedPlayer);
+        redTeam.push(newRedPlayer);
+        listOfPlayers.splice(redIndex, 1);
         const li = document.createElement("li");
         li.appendChild(document.createTextNode(newRedPlayer.name + " - " + "Mascot = " + newRedPlayer.mascot + " and Team Color is " + newRedPlayer.teamColor));
         playersRed.append(li);
@@ -182,15 +200,18 @@ const arrOfPeople = [
       if (typeof describe === 'function'){
         describe('Player', function(){
           it('should throw a ball, dodge a ball, has paid dues, is healthy, has experience', function(){
-            let newPlayer = new Player(true, true, true, true, 4);
-            assert.equal(newplayer.canThrowBall, true);
-            assert.equal(newplayer.canDodgeBall, true);
-            assert.equal(newplayer.hasPaid, true);
-            assert.equal(newplayer.isHealthy, true);
-            assert.equal(newplayer.yearsExperience, 4);
+            let newPlayer = new Player('newPlayer.id', 'newPlayer.name', 'newPlayer.age', 'newPlayer.skillSet', 'newPlayer.placeBorn', true, true, true, true, 4);
+            assert.equal(newPlayer.canThrowBall, true);
+            assert.equal(newPlayer.canDodgeBall, true);
+            assert.equal(newPlayer.hasPaid, true);
+            assert.equal(newPlayer.isHealthy, true);
+            assert.equal(newPlayer.yearsExperience, 4);
           });
         });
-        it('should be able to become a Red Player', function(){
-          let 
-        })
+        // it('should be able to become a Red Player', function(){
+        //   let 
+        // });
+        // it('should be able to become a Blue Player', function(){
+
+        // });
       }
