@@ -1,4 +1,5 @@
 'use strict';
+let assert = require('assert');
 
 const arrOfPeople = [
     {
@@ -209,10 +210,20 @@ const arrOfPeople = [
             assert.equal(newPlayer.yearsExperience, 4);
           });
         });
-        // it('should be able to become a Red Player', function(){
-        //   let 
-        // });
-        // it('should be able to become a Blue Player', function(){
-
-        // });
       }
+      if (typeof describe === 'function'){
+        describe('Team', function(){
+        it('team mate should have mascot', function(){
+          let  newBluePlayer = new BlueTeammate ('newBluePlayer.id', 'newBluePlayer.name', 'newBluePlayer.age', 'newBluePlayer.skillSet', 'newBluePlayer.placeBorn', true, true, true, true, 4, 'Dragon', 'Blue');
+          assert.equal(newBluePlayer.mascot, 'Dragon');
+        });
+      });
+    }
+        if (typeof describe === 'function'){
+          describe('Team', function(){
+          it('team mate should have team color', function(){
+            let  newBluePlayer = new BlueTeammate ('newBluePlayer.id', 'newBluePlayer.name', 'newBluePlayer.age', 'newBluePlayer.skillSet', 'newBluePlayer.placeBorn', true, true, true, true, 4, 'Dragon', 'Blue');
+            assert.equal(newBluePlayer.teamColor, 'Blue');
+          });
+      });
+    }
